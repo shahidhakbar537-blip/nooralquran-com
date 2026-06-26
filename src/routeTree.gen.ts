@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahsRouteImport } from './routes/surahs'
 import { Route as JuzRouteImport } from './routes/juz'
+import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
 import { Route as JuzNumberRouteImport } from './routes/juz.$number'
@@ -29,6 +30,11 @@ const SurahsRoute = SurahsRouteImport.update({
 const JuzRoute = JuzRouteImport.update({
   id: '/juz',
   path: '/juz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AyatulKursiRoute = AyatulKursiRouteImport.update({
+  id: '/ayatul-kursi',
+  path: '/ayatul-kursi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,6 +55,7 @@ const JuzNumberRoute = JuzNumberRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ayatul-kursi': typeof AyatulKursiRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ayatul-kursi': typeof AyatulKursiRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ayatul-kursi': typeof AyatulKursiRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
@@ -76,16 +85,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ayatul-kursi'
     | '/juz'
     | '/surahs'
     | '/yaseen'
     | '/juz/$number'
     | '/surah/$number'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/juz' | '/surahs' | '/yaseen' | '/juz/$number' | '/surah/$number'
+  to:
+    | '/'
+    | '/ayatul-kursi'
+    | '/juz'
+    | '/surahs'
+    | '/yaseen'
+    | '/juz/$number'
+    | '/surah/$number'
   id:
     | '__root__'
     | '/'
+    | '/ayatul-kursi'
     | '/juz'
     | '/surahs'
     | '/yaseen'
@@ -95,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AyatulKursiRoute: typeof AyatulKursiRoute
   JuzRoute: typeof JuzRouteWithChildren
   SurahsRoute: typeof SurahsRoute
   YaseenRoute: typeof YaseenRoute
@@ -122,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/juz'
       fullPath: '/juz'
       preLoaderRoute: typeof JuzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ayatul-kursi': {
+      id: '/ayatul-kursi'
+      path: '/ayatul-kursi'
+      fullPath: '/ayatul-kursi'
+      preLoaderRoute: typeof AyatulKursiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -160,6 +186,7 @@ const JuzRouteWithChildren = JuzRoute._addFileChildren(JuzRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AyatulKursiRoute: AyatulKursiRoute,
   JuzRoute: JuzRouteWithChildren,
   SurahsRoute: SurahsRoute,
   YaseenRoute: YaseenRoute,
