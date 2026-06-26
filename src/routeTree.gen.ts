@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahsRouteImport } from './routes/surahs'
 import { Route as JuzRouteImport } from './routes/juz'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
 import { Route as JuzNumberRouteImport } from './routes/juz.$number'
 
+const YaseenRoute = YaseenRouteImport.update({
+  id: '/yaseen',
+  path: '/yaseen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SurahsRoute = SurahsRouteImport.update({
   id: '/surahs',
   path: '/surahs',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/yaseen': typeof YaseenRoute
   '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/yaseen': typeof YaseenRoute
   '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
@@ -60,26 +68,48 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/yaseen': typeof YaseenRoute
   '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
+  fullPaths:
+    | '/'
+    | '/juz'
+    | '/surahs'
+    | '/yaseen'
+    | '/juz/$number'
+    | '/surah/$number'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
-  id: '__root__' | '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
+  to: '/' | '/juz' | '/surahs' | '/yaseen' | '/juz/$number' | '/surah/$number'
+  id:
+    | '__root__'
+    | '/'
+    | '/juz'
+    | '/surahs'
+    | '/yaseen'
+    | '/juz/$number'
+    | '/surah/$number'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   JuzRoute: typeof JuzRouteWithChildren
   SurahsRoute: typeof SurahsRoute
+  YaseenRoute: typeof YaseenRoute
   SurahNumberRoute: typeof SurahNumberRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/yaseen': {
+      id: '/yaseen'
+      path: '/yaseen'
+      fullPath: '/yaseen'
+      preLoaderRoute: typeof YaseenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/surahs': {
       id: '/surahs'
       path: '/surahs'
@@ -132,6 +162,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   JuzRoute: JuzRouteWithChildren,
   SurahsRoute: SurahsRoute,
+  YaseenRoute: YaseenRoute,
   SurahNumberRoute: SurahNumberRoute,
 }
 export const routeTree = rootRouteImport
