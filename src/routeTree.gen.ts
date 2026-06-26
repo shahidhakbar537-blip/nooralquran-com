@@ -13,6 +13,7 @@ import { Route as SurahsRouteImport } from './routes/surahs'
 import { Route as JuzRouteImport } from './routes/juz'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
+import { Route as JuzNumberRouteImport } from './routes/juz.$number'
 
 const SurahsRoute = SurahsRouteImport.update({
   id: '/surahs',
@@ -34,37 +35,45 @@ const SurahNumberRoute = SurahNumberRouteImport.update({
   path: '/surah/$number',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JuzNumberRoute = JuzNumberRouteImport.update({
+  id: '/$number',
+  path: '/$number',
+  getParentRoute: () => JuzRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/juz': typeof JuzRoute
+  '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/juz': typeof JuzRoute
+  '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/juz': typeof JuzRoute
+  '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
+  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/juz' | '/surahs' | '/surah/$number'
+  fullPaths: '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/juz' | '/surahs' | '/surah/$number'
-  id: '__root__' | '/' | '/juz' | '/surahs' | '/surah/$number'
+  to: '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
+  id: '__root__' | '/' | '/juz' | '/surahs' | '/juz/$number' | '/surah/$number'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  JuzRoute: typeof JuzRoute
+  JuzRoute: typeof JuzRouteWithChildren
   SurahsRoute: typeof SurahsRoute
   SurahNumberRoute: typeof SurahNumberRoute
 }
@@ -99,12 +108,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurahNumberRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/juz/$number': {
+      id: '/juz/$number'
+      path: '/$number'
+      fullPath: '/juz/$number'
+      preLoaderRoute: typeof JuzNumberRouteImport
+      parentRoute: typeof JuzRoute
+    }
   }
 }
 
+interface JuzRouteChildren {
+  JuzNumberRoute: typeof JuzNumberRoute
+}
+
+const JuzRouteChildren: JuzRouteChildren = {
+  JuzNumberRoute: JuzNumberRoute,
+}
+
+const JuzRouteWithChildren = JuzRoute._addFileChildren(JuzRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  JuzRoute: JuzRoute,
+  JuzRoute: JuzRouteWithChildren,
   SurahsRoute: SurahsRoute,
   SurahNumberRoute: SurahNumberRoute,
 }
