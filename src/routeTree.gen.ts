@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahsRouteImport } from './routes/surahs'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ProphetsRouteImport } from './routes/prophets'
+import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
 import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
+import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
@@ -26,9 +30,29 @@ const SurahsRoute = SurahsRouteImport.update({
   path: '/surahs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProphetsRoute = ProphetsRouteImport.update({
+  id: '/prophets',
+  path: '/prophets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayerTimesRoute = PrayerTimesRouteImport.update({
+  id: '/prayer-times',
+  path: '/prayer-times',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowToPrayRoute = HowToPrayRouteImport.update({
   id: '/how-to-pray',
   path: '/how-to-pray',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookmarksRoute = BookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AyatulKursiRoute = AyatulKursiRouteImport.update({
@@ -50,7 +74,11 @@ const SurahNumberRoute = SurahNumberRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
   '/surah/$number': typeof SurahNumberRoute
@@ -58,7 +86,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
   '/surah/$number': typeof SurahNumberRoute
@@ -67,7 +99,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
   '/surah/$number': typeof SurahNumberRoute
@@ -77,7 +113,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
     | '/surah/$number'
@@ -85,7 +125,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
     | '/surah/$number'
@@ -93,7 +137,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
     | '/surah/$number'
@@ -102,7 +150,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AyatulKursiRoute: typeof AyatulKursiRoute
+  BookmarksRoute: typeof BookmarksRoute
   HowToPrayRoute: typeof HowToPrayRoute
+  PrayerTimesRoute: typeof PrayerTimesRoute
+  ProphetsRoute: typeof ProphetsRoute
+  QuizRoute: typeof QuizRoute
   SurahsRoute: typeof SurahsRoute
   YaseenRoute: typeof YaseenRoute
   SurahNumberRoute: typeof SurahNumberRoute
@@ -124,11 +176,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurahsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prophets': {
+      id: '/prophets'
+      path: '/prophets'
+      fullPath: '/prophets'
+      preLoaderRoute: typeof ProphetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayer-times': {
+      id: '/prayer-times'
+      path: '/prayer-times'
+      fullPath: '/prayer-times'
+      preLoaderRoute: typeof PrayerTimesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-to-pray': {
       id: '/how-to-pray'
       path: '/how-to-pray'
       fullPath: '/how-to-pray'
       preLoaderRoute: typeof HowToPrayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookmarks': {
+      id: '/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof BookmarksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ayatul-kursi': {
@@ -158,7 +238,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AyatulKursiRoute: AyatulKursiRoute,
+  BookmarksRoute: BookmarksRoute,
   HowToPrayRoute: HowToPrayRoute,
+  PrayerTimesRoute: PrayerTimesRoute,
+  ProphetsRoute: ProphetsRoute,
+  QuizRoute: QuizRoute,
   SurahsRoute: SurahsRoute,
   YaseenRoute: YaseenRoute,
   SurahNumberRoute: SurahNumberRoute,

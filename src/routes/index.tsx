@@ -1,22 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Layers, Star, Sparkles, Hand, ArrowRight } from "lucide-react";
+import { BookOpen, Star, Sparkles, Hand, ArrowRight, Clock, Users, Bookmark, Brain } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Noor al-Quran — Read & Listen to the Holy Quran" },
-      { name: "description", content: "Read and listen to the 30 Juz of the Holy Quran in Arabic with recitation by Abdul Basit Abdul Samad. Surah Yaseen, Ayatul Kursi, and a how-to-pray guide included." },
+      { name: "description", content: "Read and listen to the Holy Quran, get daily prayer times for your location, learn about the prophets, bookmark ayahs, and test your knowledge with an Islamic quiz." },
     ],
   }),
   component: Index,
 });
 
 const FEATURES = [
-  { to: "/surahs", icon: BookOpen, title: "114 Surahs", desc: "Browse every chapter of the Quran." },
-  { to: "/juz", icon: Layers, title: "30 Juz", desc: "Read the Quran organized by Juz / Para." },
+  { to: "/surahs", icon: BookOpen, title: "114 Surahs", desc: "Browse and listen to every chapter of the Quran." },
+  { to: "/prayer-times", icon: Clock, title: "Prayer Times", desc: "Daily Salah times for your location with alerts." },
+  { to: "/prophets", icon: Users, title: "The Prophets", desc: "Stories of the 25 prophets named in the Quran." },
   { to: "/yaseen", icon: Sparkles, title: "Surah Yaseen", desc: "The heart of the Quran." },
   { to: "/ayatul-kursi", icon: Star, title: "Ayatul Kursi", desc: "The throne verse for daily protection." },
   { to: "/how-to-pray", icon: Hand, title: "How to Pray", desc: "Step-by-step Salah guide with images." },
+  { to: "/bookmarks", icon: Bookmark, title: "Bookmarks", desc: "Save and revisit your favorite ayahs." },
+  { to: "/quiz", icon: Brain, title: "Islamic Quiz", desc: "Test your knowledge of Islam & Hadith." },
 ] as const;
 
 function Index() {
@@ -45,8 +48,8 @@ function Index() {
           <Link to="/surahs" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 shadow">
             Browse Surahs <ArrowRight className="w-4 h-4" />
           </Link>
-          <Link to="/juz" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium hover:bg-accent">
-            Read by Juz
+          <Link to="/prayer-times" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium hover:bg-accent">
+            Prayer Times
           </Link>
         </div>
       </section>

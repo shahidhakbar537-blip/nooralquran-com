@@ -3,7 +3,8 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { getSurahAudio } from "@/lib/quran";
 import { AudioPlayer } from "@/components/audio-player";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, BookmarkCheck } from "lucide-react";
+import { useBookmarks } from "@/lib/bookmarks";
 
 const surahQO = (n: number) =>
   queryOptions({
@@ -35,6 +36,7 @@ function SurahPage() {
   const n = parseInt(number, 10);
   const { data: surah } = useSuspenseQuery(surahQO(n));
   const [activeIdx, setActiveIdx] = useState(0);
+  const { toggle, has } = useBookmarks();
 
   const tracks = surah.ayahs.map((a) => ({
     src: a.audio!,
@@ -64,6 +66,8 @@ function SurahPage() {
           const text = surah.number !== 1 && i === 0
             ? a.text.replace(/^بِسْمِ\s*ٱ?للَّهِ\s*ٱ?لرَّحْمَٰ?نِ\s*ٱ?لرَّحِيمِ\s*/u, "")
             : a.text;
+          const id = `${surah.number}:${a.numberInSurah}`;
+          const bookmarked = has(id);
           return (
             <li
               key={a.number}
@@ -79,6 +83,18 @@ function SurahPage() {
                 <p className="font-arabic text-2xl md:text-3xl text-foreground flex-1 text-right">
                   {text}
                 </p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggle({ id, surah: surah.number, ayah: a.numberInSurah, surahName: surah.englishName, text });
+                  }}
+                  className={`shrink-0 mt-1 p-1.5 rounded-md transition-colors ${
+                    bookmarked ? "text-gold" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
+                >
+                  {bookmarked ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
+                </button>
               </div>
             </li>
           );
