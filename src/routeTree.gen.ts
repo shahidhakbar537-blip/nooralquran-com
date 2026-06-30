@@ -11,13 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahsRouteImport } from './routes/surahs'
-import { Route as JuzRouteImport } from './routes/juz'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ProphetsRouteImport } from './routes/prophets'
+import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
 import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
+import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as JuzIndexRouteImport } from './routes/juz.index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
-import { Route as JuzNumberRouteImport } from './routes/juz.$number'
 
 const YaseenRoute = YaseenRouteImport.update({
   id: '/yaseen',
@@ -29,14 +30,29 @@ const SurahsRoute = SurahsRouteImport.update({
   path: '/surahs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JuzRoute = JuzRouteImport.update({
-  id: '/juz',
-  path: '/juz',
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProphetsRoute = ProphetsRouteImport.update({
+  id: '/prophets',
+  path: '/prophets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayerTimesRoute = PrayerTimesRouteImport.update({
+  id: '/prayer-times',
+  path: '/prayer-times',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowToPrayRoute = HowToPrayRouteImport.update({
   id: '/how-to-pray',
   path: '/how-to-pray',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookmarksRoute = BookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AyatulKursiRoute = AyatulKursiRouteImport.update({
@@ -49,95 +65,96 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JuzIndexRoute = JuzIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => JuzRoute,
-} as any)
 const SurahNumberRoute = SurahNumberRouteImport.update({
   id: '/surah/$number',
   path: '/surah/$number',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JuzNumberRoute = JuzNumberRouteImport.update({
-  id: '/$number',
-  path: '/$number',
-  getParentRoute: () => JuzRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
-  '/juz': typeof JuzRouteWithChildren
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz/': typeof JuzIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz': typeof JuzIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bookmarks': typeof BookmarksRoute
   '/how-to-pray': typeof HowToPrayRoute
-  '/juz': typeof JuzRouteWithChildren
+  '/prayer-times': typeof PrayerTimesRoute
+  '/prophets': typeof ProphetsRoute
+  '/quiz': typeof QuizRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz/': typeof JuzIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
-    | '/juz'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz'
   id:
     | '__root__'
     | '/'
     | '/ayatul-kursi'
+    | '/bookmarks'
     | '/how-to-pray'
-    | '/juz'
+    | '/prayer-times'
+    | '/prophets'
+    | '/quiz'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AyatulKursiRoute: typeof AyatulKursiRoute
+  BookmarksRoute: typeof BookmarksRoute
   HowToPrayRoute: typeof HowToPrayRoute
-  JuzRoute: typeof JuzRouteWithChildren
+  PrayerTimesRoute: typeof PrayerTimesRoute
+  ProphetsRoute: typeof ProphetsRoute
+  QuizRoute: typeof QuizRoute
   SurahsRoute: typeof SurahsRoute
   YaseenRoute: typeof YaseenRoute
   SurahNumberRoute: typeof SurahNumberRoute
@@ -159,11 +176,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurahsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/juz': {
-      id: '/juz'
-      path: '/juz'
-      fullPath: '/juz'
-      preLoaderRoute: typeof JuzRouteImport
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prophets': {
+      id: '/prophets'
+      path: '/prophets'
+      fullPath: '/prophets'
+      preLoaderRoute: typeof ProphetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayer-times': {
+      id: '/prayer-times'
+      path: '/prayer-times'
+      fullPath: '/prayer-times'
+      preLoaderRoute: typeof PrayerTimesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-pray': {
@@ -171,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/how-to-pray'
       fullPath: '/how-to-pray'
       preLoaderRoute: typeof HowToPrayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookmarks': {
+      id: '/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof BookmarksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ayatul-kursi': {
@@ -187,13 +225,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/juz/': {
-      id: '/juz/'
-      path: '/'
-      fullPath: '/juz/'
-      preLoaderRoute: typeof JuzIndexRouteImport
-      parentRoute: typeof JuzRoute
-    }
     '/surah/$number': {
       id: '/surah/$number'
       path: '/surah/$number'
@@ -201,33 +232,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurahNumberRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/juz/$number': {
-      id: '/juz/$number'
-      path: '/$number'
-      fullPath: '/juz/$number'
-      preLoaderRoute: typeof JuzNumberRouteImport
-      parentRoute: typeof JuzRoute
-    }
   }
 }
-
-interface JuzRouteChildren {
-  JuzNumberRoute: typeof JuzNumberRoute
-  JuzIndexRoute: typeof JuzIndexRoute
-}
-
-const JuzRouteChildren: JuzRouteChildren = {
-  JuzNumberRoute: JuzNumberRoute,
-  JuzIndexRoute: JuzIndexRoute,
-}
-
-const JuzRouteWithChildren = JuzRoute._addFileChildren(JuzRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AyatulKursiRoute: AyatulKursiRoute,
+  BookmarksRoute: BookmarksRoute,
   HowToPrayRoute: HowToPrayRoute,
-  JuzRoute: JuzRouteWithChildren,
+  PrayerTimesRoute: PrayerTimesRoute,
+  ProphetsRoute: ProphetsRoute,
+  QuizRoute: QuizRoute,
   SurahsRoute: SurahsRoute,
   YaseenRoute: YaseenRoute,
   SurahNumberRoute: SurahNumberRoute,
