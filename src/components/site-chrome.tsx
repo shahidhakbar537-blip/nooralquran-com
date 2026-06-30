@@ -1,13 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BookOpen, Layers, Star, Sparkles, Hand, Home } from "lucide-react";
+import { BookOpen, Star, Sparkles, Hand, Home, Clock, Users, Bookmark, Brain } from "lucide-react";
 
 const NAV = [
   { to: "/", label: "Home", icon: Home },
   { to: "/surahs", label: "Surahs", icon: BookOpen },
-  { to: "/juz", label: "30 Juz", icon: Layers },
   { to: "/yaseen", label: "Yaseen", icon: Sparkles },
   { to: "/ayatul-kursi", label: "Ayatul Kursi", icon: Star },
   { to: "/how-to-pray", label: "How to Pray", icon: Hand },
+  { to: "/prayer-times", label: "Prayer Times", icon: Clock },
+  { to: "/prophets", label: "Prophets", icon: Users },
+  { to: "/bookmarks", label: "Bookmarks", icon: Bookmark },
+  { to: "/quiz", label: "Quiz", icon: Brain },
 ] as const;
 
 export function SiteHeader() {
@@ -24,14 +27,14 @@ export function SiteHeader() {
             <div className="text-[10px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
           </div>
         </Link>
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => {
             const active = pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
             return (
               <Link
                 key={n.to}
                 to={n.to}
-                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   active
                     ? "bg-primary text-primary-foreground"
                     : "text-foreground/70 hover:text-foreground hover:bg-accent"
@@ -43,7 +46,7 @@ export function SiteHeader() {
           })}
         </nav>
       </div>
-      <nav className="md:hidden flex overflow-x-auto gap-1 px-3 pb-2 -mt-1">
+      <nav className="lg:hidden flex overflow-x-auto gap-1 px-3 pb-2 -mt-1">
         {NAV.map((n) => {
           const active = pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
           const Icon = n.icon;
@@ -68,7 +71,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-border">
       <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p>Quran text & audio from AlQuran.cloud · Reciter: Abdul Basit Abdul Samad</p>
+        <p>Quran text & audio from AlQuran.cloud · Prayer times from AlAdhan</p>
         <p className="font-arabic text-base text-foreground">جزاك الله خيرا</p>
       </div>
     </footer>

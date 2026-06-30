@@ -11,13 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahsRouteImport } from './routes/surahs'
-import { Route as JuzRouteImport } from './routes/juz'
 import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
 import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as JuzIndexRouteImport } from './routes/juz.index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
-import { Route as JuzNumberRouteImport } from './routes/juz.$number'
 
 const YaseenRoute = YaseenRouteImport.update({
   id: '/yaseen',
@@ -27,11 +24,6 @@ const YaseenRoute = YaseenRouteImport.update({
 const SurahsRoute = SurahsRouteImport.update({
   id: '/surahs',
   path: '/surahs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JuzRoute = JuzRouteImport.update({
-  id: '/juz',
-  path: '/juz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowToPrayRoute = HowToPrayRouteImport.update({
@@ -49,32 +41,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JuzIndexRoute = JuzIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => JuzRoute,
-} as any)
 const SurahNumberRoute = SurahNumberRouteImport.update({
   id: '/surah/$number',
   path: '/surah/$number',
   getParentRoute: () => rootRouteImport,
-} as any)
-const JuzNumberRoute = JuzNumberRouteImport.update({
-  id: '/$number',
-  path: '/$number',
-  getParentRoute: () => JuzRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
   '/how-to-pray': typeof HowToPrayRoute
-  '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz/': typeof JuzIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,21 +61,16 @@ export interface FileRoutesByTo {
   '/how-to-pray': typeof HowToPrayRoute
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz': typeof JuzIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
   '/how-to-pray': typeof HowToPrayRoute
-  '/juz': typeof JuzRouteWithChildren
   '/surahs': typeof SurahsRoute
   '/yaseen': typeof YaseenRoute
-  '/juz/$number': typeof JuzNumberRoute
   '/surah/$number': typeof SurahNumberRoute
-  '/juz/': typeof JuzIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -104,12 +78,9 @@ export interface FileRouteTypes {
     | '/'
     | '/ayatul-kursi'
     | '/how-to-pray'
-    | '/juz'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,27 +88,21 @@ export interface FileRouteTypes {
     | '/how-to-pray'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz'
   id:
     | '__root__'
     | '/'
     | '/ayatul-kursi'
     | '/how-to-pray'
-    | '/juz'
     | '/surahs'
     | '/yaseen'
-    | '/juz/$number'
     | '/surah/$number'
-    | '/juz/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AyatulKursiRoute: typeof AyatulKursiRoute
   HowToPrayRoute: typeof HowToPrayRoute
-  JuzRoute: typeof JuzRouteWithChildren
   SurahsRoute: typeof SurahsRoute
   YaseenRoute: typeof YaseenRoute
   SurahNumberRoute: typeof SurahNumberRoute
@@ -157,13 +122,6 @@ declare module '@tanstack/react-router' {
       path: '/surahs'
       fullPath: '/surahs'
       preLoaderRoute: typeof SurahsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/juz': {
-      id: '/juz'
-      path: '/juz'
-      fullPath: '/juz'
-      preLoaderRoute: typeof JuzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-pray': {
@@ -187,13 +145,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/juz/': {
-      id: '/juz/'
-      path: '/'
-      fullPath: '/juz/'
-      preLoaderRoute: typeof JuzIndexRouteImport
-      parentRoute: typeof JuzRoute
-    }
     '/surah/$number': {
       id: '/surah/$number'
       path: '/surah/$number'
@@ -201,33 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurahNumberRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/juz/$number': {
-      id: '/juz/$number'
-      path: '/$number'
-      fullPath: '/juz/$number'
-      preLoaderRoute: typeof JuzNumberRouteImport
-      parentRoute: typeof JuzRoute
-    }
   }
 }
-
-interface JuzRouteChildren {
-  JuzNumberRoute: typeof JuzNumberRoute
-  JuzIndexRoute: typeof JuzIndexRoute
-}
-
-const JuzRouteChildren: JuzRouteChildren = {
-  JuzNumberRoute: JuzNumberRoute,
-  JuzIndexRoute: JuzIndexRoute,
-}
-
-const JuzRouteWithChildren = JuzRoute._addFileChildren(JuzRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AyatulKursiRoute: AyatulKursiRoute,
   HowToPrayRoute: HowToPrayRoute,
-  JuzRoute: JuzRouteWithChildren,
   SurahsRoute: SurahsRoute,
   YaseenRoute: YaseenRoute,
   SurahNumberRoute: SurahNumberRoute,
@@ -235,13 +166,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
