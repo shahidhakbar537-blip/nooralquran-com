@@ -186,7 +186,7 @@ function PrayerTimesPage() {
         We use your location to calculate today's Salah timings and alert you when each prayer begins.
       </p>
 
-      {!coords && (
+      {!timings && (
         <div className="mt-8 ornament-border rounded-2xl p-8 text-center">
           <MapPin className="w-8 h-8 mx-auto text-primary" />
           <p className="mt-3 font-medium">Allow location access to see your prayer times.</p>
@@ -199,8 +199,34 @@ function PrayerTimesPage() {
             Use my location
           </button>
           {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
+
+          <div className="mt-6 pt-6 border-t border-border/60">
+            <p className="text-sm text-muted-foreground mb-3">Or enter your city manually</p>
+            <form onSubmit={fetchByCity} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <input
+                value={cityInput}
+                onChange={(e) => setCityInput(e.target.value)}
+                placeholder="City (e.g. London)"
+                className="flex-1 rounded-full border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+              <input
+                value={countryInput}
+                onChange={(e) => setCountryInput(e.target.value)}
+                placeholder="Country (e.g. UK)"
+                className="flex-1 rounded-full border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+              <button
+                type="submit"
+                disabled={loading || !cityInput.trim()}
+                className="rounded-full bg-primary text-primary-foreground px-5 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              >
+                Get times
+              </button>
+            </form>
+          </div>
         </div>
       )}
+
 
       {timings && (
         <>
