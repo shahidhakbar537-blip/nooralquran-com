@@ -28,6 +28,8 @@ function PrayerTimesPage() {
   const [loading, setLoading] = useState(false);
   const [alertsOn, setAlertsOn] = useState(false);
   const [now, setNow] = useState(new Date());
+  const [cityInput, setCityInput] = useState("");
+  const [countryInput, setCountryInput] = useState("");
   const firedRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
@@ -39,20 +41,58 @@ function PrayerTimesPage() {
     setError("");
     setLoading(true);
     if (!("geolocation" in navigator)) {
-      setError("Geolocation is not available in this browser.");
+      setError("Geolocation is not available in this browser. Please enter your city below.");
       setLoading(false);
       return;
     }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-      (e) => { setError(e.message || "Could not get your location."); setLoading(false); },
-      { enableHighAccuracy: false, timeout: 10000 },
-    );
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+        (e) => {
+          const msg =
+            e.code === 1
+              ? "Location permission denied. In the preview, browsers block geolocation inside iframes — open the published site, or enter your city below."
+              : e.code === 2
+              ? "Your location is unavailable right now. Please enter your city below."
+              : e.code === 3
+              ? "Location request timed out. Please enter your city below."
+              : e.message || "Could not get your location.";
+          setError(msg);
+          setLoading(false);
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
+      );
+    } catch (err: any) {
+      setError(err?.message || "Geolocation blocked. Please enter your city below.");
+      setLoading(false);
+    }
   };
 
-  // Fetch timings when coords change
+  const fetchByCity = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!cityInput.trim()) return;
+    setError("");
+    setLoading(true);
+    try {
+      const d = new Date();
+      const url = `https://api.aladhan.com/v1/timingsByCity/${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}?city=${encodeURIComponent(cityInput)}&country=${encodeURIComponent(countryInput)}&method=2`;
+      const r = await fetch(url);
+      const j = await r.json();
+      if (j.code !== 200) throw new Error("City not found. Try a different spelling.");
+      setTimings(j.data.timings);
+      setDate(j.data.date.readable);
+      setCity(`${cityInput}${countryInput ? ", " + countryInput : ""}`);
+      setCoords({ lat: 0, lon: 0 });
+      setLoading(false);
+    } catch (err: any) {
+      setError(err.message || "Failed to load prayer times.");
+      setLoading(false);
+    }
+  };
+
+  // Fetch timings when coords change (only when using geolocation, lat/lon != 0)
   useEffect(() => {
-    if (!coords) return;
+    if (!coords || (coords.lat === 0 && coords.lon === 0)) return;
     (async () => {
       try {
         const d = new Date();
@@ -70,6 +110,7 @@ function PrayerTimesPage() {
       }
     })();
   }, [coords]);
+
 
   const enableAlerts = async () => {
     if (!("Notification" in window)) {
