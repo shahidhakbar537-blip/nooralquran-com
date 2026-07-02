@@ -15,6 +15,8 @@ import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ProphetsRouteImport } from './routes/prophets'
 import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
 import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
+import { Route as HolyCitiesRouteImport } from './routes/holy-cities'
+import { Route as HajjUmrahRouteImport } from './routes/hajj-umrah'
 import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
@@ -50,6 +52,16 @@ const HowToPrayRoute = HowToPrayRouteImport.update({
   path: '/how-to-pray',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HolyCitiesRoute = HolyCitiesRouteImport.update({
+  id: '/holy-cities',
+  path: '/holy-cities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HajjUmrahRoute = HajjUmrahRouteImport.update({
+  id: '/hajj-umrah',
+  path: '/hajj-umrah',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookmarksRoute = BookmarksRouteImport.update({
   id: '/bookmarks',
   path: '/bookmarks',
@@ -75,6 +87,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
   '/bookmarks': typeof BookmarksRoute
+  '/hajj-umrah': typeof HajjUmrahRoute
+  '/holy-cities': typeof HolyCitiesRoute
   '/how-to-pray': typeof HowToPrayRoute
   '/prayer-times': typeof PrayerTimesRoute
   '/prophets': typeof ProphetsRoute
@@ -87,6 +101,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
   '/bookmarks': typeof BookmarksRoute
+  '/hajj-umrah': typeof HajjUmrahRoute
+  '/holy-cities': typeof HolyCitiesRoute
   '/how-to-pray': typeof HowToPrayRoute
   '/prayer-times': typeof PrayerTimesRoute
   '/prophets': typeof ProphetsRoute
@@ -100,6 +116,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
   '/bookmarks': typeof BookmarksRoute
+  '/hajj-umrah': typeof HajjUmrahRoute
+  '/holy-cities': typeof HolyCitiesRoute
   '/how-to-pray': typeof HowToPrayRoute
   '/prayer-times': typeof PrayerTimesRoute
   '/prophets': typeof ProphetsRoute
@@ -114,6 +132,8 @@ export interface FileRouteTypes {
     | '/'
     | '/ayatul-kursi'
     | '/bookmarks'
+    | '/hajj-umrah'
+    | '/holy-cities'
     | '/how-to-pray'
     | '/prayer-times'
     | '/prophets'
@@ -126,6 +146,8 @@ export interface FileRouteTypes {
     | '/'
     | '/ayatul-kursi'
     | '/bookmarks'
+    | '/hajj-umrah'
+    | '/holy-cities'
     | '/how-to-pray'
     | '/prayer-times'
     | '/prophets'
@@ -138,6 +160,8 @@ export interface FileRouteTypes {
     | '/'
     | '/ayatul-kursi'
     | '/bookmarks'
+    | '/hajj-umrah'
+    | '/holy-cities'
     | '/how-to-pray'
     | '/prayer-times'
     | '/prophets'
@@ -151,6 +175,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AyatulKursiRoute: typeof AyatulKursiRoute
   BookmarksRoute: typeof BookmarksRoute
+  HajjUmrahRoute: typeof HajjUmrahRoute
+  HolyCitiesRoute: typeof HolyCitiesRoute
   HowToPrayRoute: typeof HowToPrayRoute
   PrayerTimesRoute: typeof PrayerTimesRoute
   ProphetsRoute: typeof ProphetsRoute
@@ -204,6 +230,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToPrayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/holy-cities': {
+      id: '/holy-cities'
+      path: '/holy-cities'
+      fullPath: '/holy-cities'
+      preLoaderRoute: typeof HolyCitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hajj-umrah': {
+      id: '/hajj-umrah'
+      path: '/hajj-umrah'
+      fullPath: '/hajj-umrah'
+      preLoaderRoute: typeof HajjUmrahRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bookmarks': {
       id: '/bookmarks'
       path: '/bookmarks'
@@ -239,6 +279,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AyatulKursiRoute: AyatulKursiRoute,
   BookmarksRoute: BookmarksRoute,
+  HajjUmrahRoute: HajjUmrahRoute,
+  HolyCitiesRoute: HolyCitiesRoute,
   HowToPrayRoute: HowToPrayRoute,
   PrayerTimesRoute: PrayerTimesRoute,
   ProphetsRoute: ProphetsRoute,

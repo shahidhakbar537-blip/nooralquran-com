@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Star, Sparkles, Hand, ArrowRight, Clock, Users, Bookmark, Brain } from "lucide-react";
+import { BookOpen, Star, Sparkles, Hand, ArrowRight, Clock, Users, Bookmark, Brain, Landmark, Compass } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Noor al-Quran — Read & Listen to the Holy Quran" },
-      { name: "description", content: "Read and listen to the Holy Quran, get daily prayer times for your location, learn about the prophets, bookmark ayahs, and test your knowledge with an Islamic quiz." },
+      { name: "description", content: "Read and listen to the Holy Quran, get prayer times, learn how to pray, explore the history of Makkah & Madina, and prepare for Hajj and Umrah." },
     ],
   }),
   component: Index,
@@ -15,6 +15,8 @@ const FEATURES = [
   { to: "/surahs", icon: BookOpen, title: "114 Surahs", desc: "Browse and listen to every chapter of the Quran." },
   { to: "/prayer-times", icon: Clock, title: "Prayer Times", desc: "Daily Salah times for your location with alerts." },
   { to: "/prophets", icon: Users, title: "The Prophets", desc: "Stories of the 25 prophets named in the Quran." },
+  { to: "/holy-cities", icon: Landmark, title: "Makkah & Madina", desc: "History and significance of the two holy cities." },
+  { to: "/hajj-umrah", icon: Compass, title: "Hajj & Umrah", desc: "Prepare and perform the pilgrimage step by step." },
   { to: "/yaseen", icon: Sparkles, title: "Surah Yaseen", desc: "The heart of the Quran." },
   { to: "/ayatul-kursi", icon: Star, title: "Ayatul Kursi", desc: "The throne verse for daily protection." },
   { to: "/how-to-pray", icon: Hand, title: "How to Pray", desc: "Step-by-step Salah guide with images." },
