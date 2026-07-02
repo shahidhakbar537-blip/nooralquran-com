@@ -28,6 +28,8 @@ function PrayerTimesPage() {
   const [loading, setLoading] = useState(false);
   const [alertsOn, setAlertsOn] = useState(false);
   const [now, setNow] = useState(new Date());
+  const [cityInput, setCityInput] = useState("");
+  const [countryInput, setCountryInput] = useState("");
   const firedRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
@@ -39,20 +41,58 @@ function PrayerTimesPage() {
     setError("");
     setLoading(true);
     if (!("geolocation" in navigator)) {
-      setError("Geolocation is not available in this browser.");
+      setError("Geolocation is not available in this browser. Please enter your city below.");
       setLoading(false);
       return;
     }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-      (e) => { setError(e.message || "Could not get your location."); setLoading(false); },
-      { enableHighAccuracy: false, timeout: 10000 },
-    );
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+        (e) => {
+          const msg =
+            e.code === 1
+              ? "Location permission denied. In the preview, browsers block geolocation inside iframes — open the published site, or enter your city below."
+              : e.code === 2
+              ? "Your location is unavailable right now. Please enter your city below."
+              : e.code === 3
+              ? "Location request timed out. Please enter your city below."
+              : e.message || "Could not get your location.";
+          setError(msg);
+          setLoading(false);
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
+      );
+    } catch (err: any) {
+      setError(err?.message || "Geolocation blocked. Please enter your city below.");
+      setLoading(false);
+    }
   };
 
-  // Fetch timings when coords change
+  const fetchByCity = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!cityInput.trim()) return;
+    setError("");
+    setLoading(true);
+    try {
+      const d = new Date();
+      const url = `https://api.aladhan.com/v1/timingsByCity/${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}?city=${encodeURIComponent(cityInput)}&country=${encodeURIComponent(countryInput)}&method=2`;
+      const r = await fetch(url);
+      const j = await r.json();
+      if (j.code !== 200) throw new Error("City not found. Try a different spelling.");
+      setTimings(j.data.timings);
+      setDate(j.data.date.readable);
+      setCity(`${cityInput}${countryInput ? ", " + countryInput : ""}`);
+      setCoords({ lat: 0, lon: 0 });
+      setLoading(false);
+    } catch (err: any) {
+      setError(err.message || "Failed to load prayer times.");
+      setLoading(false);
+    }
+  };
+
+  // Fetch timings when coords change (only when using geolocation, lat/lon != 0)
   useEffect(() => {
-    if (!coords) return;
+    if (!coords || (coords.lat === 0 && coords.lon === 0)) return;
     (async () => {
       try {
         const d = new Date();
@@ -70,6 +110,7 @@ function PrayerTimesPage() {
       }
     })();
   }, [coords]);
+
 
   const enableAlerts = async () => {
     if (!("Notification" in window)) {
@@ -145,7 +186,7 @@ function PrayerTimesPage() {
         We use your location to calculate today's Salah timings and alert you when each prayer begins.
       </p>
 
-      {!coords && (
+      {!timings && (
         <div className="mt-8 ornament-border rounded-2xl p-8 text-center">
           <MapPin className="w-8 h-8 mx-auto text-primary" />
           <p className="mt-3 font-medium">Allow location access to see your prayer times.</p>
@@ -158,8 +199,34 @@ function PrayerTimesPage() {
             Use my location
           </button>
           {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
+
+          <div className="mt-6 pt-6 border-t border-border/60">
+            <p className="text-sm text-muted-foreground mb-3">Or enter your city manually</p>
+            <form onSubmit={fetchByCity} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <input
+                value={cityInput}
+                onChange={(e) => setCityInput(e.target.value)}
+                placeholder="City (e.g. London)"
+                className="flex-1 rounded-full border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+              <input
+                value={countryInput}
+                onChange={(e) => setCountryInput(e.target.value)}
+                placeholder="Country (e.g. UK)"
+                className="flex-1 rounded-full border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+              <button
+                type="submit"
+                disabled={loading || !cityInput.trim()}
+                className="rounded-full bg-primary text-primary-foreground px-5 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              >
+                Get times
+              </button>
+            </form>
+          </div>
         </div>
       )}
+
 
       {timings && (
         <>
