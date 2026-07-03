@@ -19,6 +19,7 @@ const FEATURES = [
   { to: "/hajj-umrah", icon: Compass, title: "Hajj & Umrah", desc: "Prepare and perform the pilgrimage step by step." },
   { to: "/yaseen", icon: Sparkles, title: "Surah Yaseen", desc: "The heart of the Quran." },
   { to: "/ayatul-kursi", icon: Star, title: "Ayatul Kursi", desc: "The throne verse for daily protection." },
+  { to: "/bayans", icon: Video, title: "Bayans & Lectures", desc: "Watch recitations by Abdul Basit and scholars." },
   { to: "/how-to-pray", icon: Hand, title: "How to Pray", desc: "Step-by-step Salah guide with images." },
   { to: "/bookmarks", icon: Bookmark, title: "Bookmarks", desc: "Save and revisit your favorite ayahs." },
   { to: "/quiz", icon: Brain, title: "Islamic Quiz", desc: "Test your knowledge of Islam & Hadith." },
