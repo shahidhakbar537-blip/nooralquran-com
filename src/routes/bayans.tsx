@@ -16,7 +16,7 @@ type Bayan = {
   id: string; // YouTube video ID
   title: string;
   speaker: string;
-  category: "Recitation" | "Bayan" | "Tafsir" | "Hadith" | "Seerah";
+  category: "Recitation" | "Praise of Allah" | "Daily Practice" | "Bayan" | "Tafsir" | "Hadith" | "Seerah";
   duration?: string;
 };
 
