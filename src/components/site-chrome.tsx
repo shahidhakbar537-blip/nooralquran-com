@@ -1,11 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BookOpen, Star, Sparkles, Hand, Home, Clock, Users, Bookmark, Brain, Landmark, Compass } from "lucide-react";
+import { BookOpen, Star, Sparkles, Hand, Home, Clock, Users, Bookmark, Brain, Landmark, Compass, Video } from "lucide-react";
 
 const NAV = [
   { to: "/", label: "Home", icon: Home },
   { to: "/surahs", label: "Surahs", icon: BookOpen },
   { to: "/yaseen", label: "Yaseen", icon: Sparkles },
   { to: "/ayatul-kursi", label: "Ayatul Kursi", icon: Star },
+  { to: "/bayans", label: "Bayans", icon: Video },
   { to: "/how-to-pray", label: "How to Pray", icon: Hand },
   { to: "/prayer-times", label: "Prayer Times", icon: Clock },
   { to: "/prophets", label: "Prophets", icon: Users },

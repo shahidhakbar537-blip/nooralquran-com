@@ -18,6 +18,7 @@ import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
 import { Route as HolyCitiesRouteImport } from './routes/holy-cities'
 import { Route as HajjUmrahRouteImport } from './routes/hajj-umrah'
 import { Route as BookmarksRouteImport } from './routes/bookmarks'
+import { Route as BayansRouteImport } from './routes/bayans'
 import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
@@ -67,6 +68,11 @@ const BookmarksRoute = BookmarksRouteImport.update({
   path: '/bookmarks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BayansRoute = BayansRouteImport.update({
+  id: '/bayans',
+  path: '/bayans',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AyatulKursiRoute = AyatulKursiRouteImport.update({
   id: '/ayatul-kursi',
   path: '/ayatul-kursi',
@@ -86,6 +92,7 @@ const SurahNumberRoute = SurahNumberRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bayans': typeof BayansRoute
   '/bookmarks': typeof BookmarksRoute
   '/hajj-umrah': typeof HajjUmrahRoute
   '/holy-cities': typeof HolyCitiesRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bayans': typeof BayansRoute
   '/bookmarks': typeof BookmarksRoute
   '/hajj-umrah': typeof HajjUmrahRoute
   '/holy-cities': typeof HolyCitiesRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ayatul-kursi': typeof AyatulKursiRoute
+  '/bayans': typeof BayansRoute
   '/bookmarks': typeof BookmarksRoute
   '/hajj-umrah': typeof HajjUmrahRoute
   '/holy-cities': typeof HolyCitiesRoute
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/ayatul-kursi'
+    | '/bayans'
     | '/bookmarks'
     | '/hajj-umrah'
     | '/holy-cities'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/ayatul-kursi'
+    | '/bayans'
     | '/bookmarks'
     | '/hajj-umrah'
     | '/holy-cities'
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/ayatul-kursi'
+    | '/bayans'
     | '/bookmarks'
     | '/hajj-umrah'
     | '/holy-cities'
@@ -174,6 +186,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AyatulKursiRoute: typeof AyatulKursiRoute
+  BayansRoute: typeof BayansRoute
   BookmarksRoute: typeof BookmarksRoute
   HajjUmrahRoute: typeof HajjUmrahRoute
   HolyCitiesRoute: typeof HolyCitiesRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookmarksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bayans': {
+      id: '/bayans'
+      path: '/bayans'
+      fullPath: '/bayans'
+      preLoaderRoute: typeof BayansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ayatul-kursi': {
       id: '/ayatul-kursi'
       path: '/ayatul-kursi'
@@ -278,6 +298,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AyatulKursiRoute: AyatulKursiRoute,
+  BayansRoute: BayansRoute,
   BookmarksRoute: BookmarksRoute,
   HajjUmrahRoute: HajjUmrahRoute,
   HolyCitiesRoute: HolyCitiesRoute,
@@ -292,13 +313,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
