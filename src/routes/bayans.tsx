@@ -297,17 +297,27 @@ function BayansPage() {
                 className="w-full h-full"
               />
             </div>
-            <div className="p-4 flex items-start justify-between gap-3">
+            <div className="p-4 flex items-start justify-between gap-3 flex-wrap">
               <div>
                 <h3 className="font-semibold">{active.title}</h3>
                 <p className="text-sm text-muted-foreground">{active.speaker} · {active.category}</p>
               </div>
-              <button
-                onClick={() => setActive(null)}
-                className="px-3 py-1.5 rounded-md text-sm font-medium bg-accent hover:bg-accent/70"
-              >
-                Close
-              </button>
+              <div className="flex gap-2">
+                <a
+                  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(active.title + " " + active.speaker)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-md text-sm font-medium border border-border hover:bg-accent"
+                >
+                  Search on YouTube
+                </a>
+                <button
+                  onClick={() => setActive(null)}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium bg-accent hover:bg-accent/70"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>
