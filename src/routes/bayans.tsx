@@ -16,7 +16,7 @@ type Bayan = {
   id: string; // YouTube video ID
   title: string;
   speaker: string;
-  category: "Recitation" | "Bayan" | "Tafsir" | "Hadith" | "Seerah";
+  category: "Recitation" | "Praise of Allah" | "Daily Practice" | "Bayan" | "Tafsir" | "Hadith" | "Seerah";
   duration?: string;
 };
 
@@ -52,9 +52,27 @@ const BAYANS: Bayan[] = [
   // Hadith
   { id: "0GHqz8YE_hI", title: "40 Hadith of Imam An-Nawawi — Explained", speaker: "Dr. Yasir Qadhi", category: "Hadith" },
   { id: "b6PMwtKzUYY", title: "Sahih Al-Bukhari — Introduction", speaker: "Sheikh Assim Al-Hakeem", category: "Hadith" },
+
+  // Praise of Allah — Hamd, Tasbih, Names & Attributes
+  { id: "AzHwaR7Y_XU", title: "The 99 Names of Allah — Asma ul Husna", speaker: "Recitation", category: "Praise of Allah" },
+  { id: "AR-8B3elfBk", title: "Why We Praise Allah — Alhamdulillah", speaker: "Mufti Ismail Menk", category: "Praise of Allah" },
+  { id: "wAJvcOoxARE", title: "The Meaning of SubhanAllah", speaker: "Nouman Ali Khan", category: "Praise of Allah" },
+  { id: "hMkYA4vjbJk", title: "Reflecting on Allah's Greatness", speaker: "Sheikh Omar Suleiman", category: "Praise of Allah" },
+  { id: "n95f0M-EPeE", title: "Allahu Akbar — The Meaning of Takbir", speaker: "Mufti Ismail Menk", category: "Praise of Allah" },
+  { id: "1TXvNP4mUYw", title: "Tasbih of the Prophet ﷺ", speaker: "Sheikh Assim Al-Hakeem", category: "Praise of Allah" },
+
+  // Daily Practice — What should we do every day
+  { id: "cCwSPuwFhWo", title: "Morning & Evening Adhkar (Duas)", speaker: "Daily Reminder", category: "Daily Practice" },
+  { id: "3B3VYRTKfLM", title: "Sunnah Acts to Do Every Day", speaker: "Mufti Ismail Menk", category: "Daily Practice" },
+  { id: "H8s7HAO_5jE", title: "How to Start Your Day as a Muslim", speaker: "Sheikh Omar Suleiman", category: "Daily Practice" },
+  { id: "8yPRu4hNo1s", title: "Duas Before Sleeping", speaker: "Sheikh Assim Al-Hakeem", category: "Daily Practice" },
+  { id: "8YQmn-Xw2Xk", title: "Habits of a Righteous Muslim", speaker: "Mufti Ismail Menk", category: "Daily Practice" },
+  { id: "Idc8VvXKZOw", title: "How to Make Dhikr a Habit", speaker: "Nouman Ali Khan", category: "Daily Practice" },
+  { id: "0lJ5A5jvVzE", title: "Sunnah of Eating & Drinking", speaker: "Sheikh Assim Al-Hakeem", category: "Daily Practice" },
+  { id: "SgWc2krtoyI", title: "The Best Daily Deeds", speaker: "Dr. Yasir Qadhi", category: "Daily Practice" },
 ];
 
-const CATEGORIES = ["All", "Recitation", "Bayan", "Tafsir", "Hadith", "Seerah"] as const;
+const CATEGORIES = ["All", "Praise of Allah", "Daily Practice", "Recitation", "Bayan", "Tafsir", "Hadith", "Seerah"] as const;
 
 function BayansPage() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
