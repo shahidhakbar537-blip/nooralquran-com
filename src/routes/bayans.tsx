@@ -72,7 +72,7 @@ const BAYANS: Bayan[] = [
   { id: "SgWc2krtoyI", title: "The Best Daily Deeds", speaker: "Dr. Yasir Qadhi", category: "Daily Practice" },
 ];
 
-const CATEGORIES = ["All", "Recitation", "Bayan", "Tafsir", "Hadith", "Seerah"] as const;
+const CATEGORIES = ["All", "Praise of Allah", "Daily Practice", "Recitation", "Bayan", "Tafsir", "Hadith", "Seerah"] as const;
 
 function BayansPage() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
