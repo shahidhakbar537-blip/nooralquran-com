@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Star, Sparkles, Hand, ArrowRight, Clock, Users, Bookmark, Brain, Landmark, Compass } from "lucide-react";
+import { BookOpen, Star, Sparkles, Hand, ArrowRight, Clock, Users, Bookmark, Brain, Landmark, Compass, Video } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
