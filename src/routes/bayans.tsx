@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Play, Search } from "lucide-react";
+import { Play, Search, ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/bayans")({
   head: () => ({
