@@ -242,34 +242,58 @@ function BayansPage() {
 
       {/* Grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((b) => (
-          <button
-            key={b.id}
-            onClick={() => setActive(b)}
-            className="group text-left rounded-xl overflow-hidden border border-border bg-card hover:-translate-y-0.5 transition-transform"
-          >
-            <div className="relative aspect-video bg-muted overflow-hidden">
-              <img
-                src={`https://i.ytimg.com/vi/${b.id}/hqdefault.jpg`}
-                alt={b.title}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 grid place-items-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-lg">
-                  <Play className="w-6 h-6 ml-0.5" fill="currentColor" />
+        {filtered.map((b) => {
+          const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+            b.title + " " + b.speaker,
+          )}`;
+          return (
+            <div
+              key={b.id + b.title}
+              className="group text-left rounded-xl overflow-hidden border border-border bg-card hover:-translate-y-0.5 transition-transform"
+            >
+              <button
+                onClick={() => setActive(b)}
+                className="block w-full text-left"
+                aria-label={`Play ${b.title}`}
+              >
+                <div className="relative aspect-video bg-muted overflow-hidden">
+                  <img
+                    src={`https://i.ytimg.com/vi/${b.id}/hqdefault.jpg`}
+                    alt={b.title}
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        "https://i.ytimg.com/img/no_thumbnail.jpg";
+                    }}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 grid place-items-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                    <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-lg">
+                      <Play className="w-6 h-6 ml-0.5" fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-background/90 text-[10px] font-medium uppercase tracking-wider">
+                    {b.category}
+                  </div>
                 </div>
-              </div>
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-background/90 text-[10px] font-medium uppercase tracking-wider">
-                {b.category}
+                <div className="p-4 pb-2">
+                  <h3 className="font-semibold leading-snug line-clamp-2">{b.title}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">{b.speaker}</p>
+                </div>
+              </button>
+              <div className="px-4 pb-4">
+                <a
+                  href={searchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                >
+                  <ExternalLink className="w-3 h-3" /> Open on YouTube
+                </a>
               </div>
             </div>
-            <div className="p-4">
-              <h3 className="font-semibold leading-snug line-clamp-2">{b.title}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">{b.speaker}</p>
-            </div>
-          </button>
-        ))}
+          );
+        })}
         {filtered.length === 0 && (
           <p className="col-span-full text-center text-sm text-muted-foreground py-12">
             No videos match your search.
@@ -287,12 +311,13 @@ function BayansPage() {
             className="w-full max-w-4xl bg-card rounded-xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="aspect-video bg-black">
+            <div className="aspect-video bg-black relative">
               <iframe
                 key={active.id}
-                src={`https://www.youtube.com/embed/${active.id}?autoplay=1&rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${active.id}?autoplay=1&rel=0&playsinline=1`}
                 title={active.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 className="w-full h-full"
               />
@@ -300,9 +325,22 @@ function BayansPage() {
             <div className="p-4 flex items-start justify-between gap-3 flex-wrap">
               <div>
                 <h3 className="font-semibold">{active.title}</h3>
-                <p className="text-sm text-muted-foreground">{active.speaker} · {active.category}</p>
+                <p className="text-sm text-muted-foreground">
+                  {active.speaker} · {active.category}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Video not loading? Use the buttons on the right to watch it directly on YouTube.
+                </p>
               </div>
               <div className="flex gap-2">
+                <a
+                  href={`https://www.youtube.com/watch?v=${active.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-md text-sm font-medium border border-border hover:bg-accent"
+                >
+                  Watch on YouTube
+                </a>
                 <a
                   href={`https://www.youtube.com/results?search_query=${encodeURIComponent(active.title + " " + active.speaker)}`}
                   target="_blank"
@@ -329,3 +367,4 @@ function BayansPage() {
     </div>
   );
 }
+
