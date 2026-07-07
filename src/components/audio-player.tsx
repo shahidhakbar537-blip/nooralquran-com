@@ -3,6 +3,11 @@ import { Play, Pause, SkipBack, SkipForward, Loader2 } from "lucide-react";
 
 type Track = { src: string; label: string };
 
+const clampIndex = (value: number, length: number) => {
+  if (length <= 0) return 0;
+  return Math.min(Math.max(value, 0), length - 1);
+};
+
 export function AudioPlayer({
   tracks,
   initialIndex = 0,
@@ -14,19 +19,27 @@ export function AudioPlayer({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const prevInitialIndexRef = useRef(initialIndex);
-  const [index, setIndex] = useState(initialIndex);
+  const externalChangeRef = useRef<number | null>(null);
+  const [index, setIndex] = useState(() => clampIndex(initialIndex, tracks.length));
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const nextIndex = Math.min(Math.max(initialIndex, 0), tracks.length - 1);
+    const nextIndex = clampIndex(initialIndex, tracks.length);
     if (initialIndex !== prevInitialIndexRef.current && Number.isFinite(nextIndex) && nextIndex !== index) {
       prevInitialIndexRef.current = initialIndex;
+      externalChangeRef.current = nextIndex;
       setIndex(nextIndex);
     }
   }, [initialIndex, index, tracks.length]);
 
   useEffect(() => {
+    if (externalChangeRef.current !== null) {
+      if (externalChangeRef.current === index) {
+        externalChangeRef.current = null;
+      }
+      return;
+    }
     onIndexChange?.(index);
   }, [index, onIndexChange]);
 
@@ -35,7 +48,6 @@ export function AudioPlayer({
     if (!a) return;
     if (playing) {
       setLoading(true);
-      a.currentTime = 0;
       a.play().catch(() => setPlaying(false)).finally(() => setLoading(false));
     } else {
       a.pause();
