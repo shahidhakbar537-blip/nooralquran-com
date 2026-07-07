@@ -13,13 +13,15 @@ export function AudioPlayer({
   onIndexChange?: (i: number) => void;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const prevInitialIndexRef = useRef(initialIndex);
   const [index, setIndex] = useState(initialIndex);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const nextIndex = Math.min(Math.max(initialIndex, 0), tracks.length - 1);
-    if (Number.isFinite(nextIndex) && nextIndex !== index) {
+    if (initialIndex !== prevInitialIndexRef.current && Number.isFinite(nextIndex) && nextIndex !== index) {
+      prevInitialIndexRef.current = initialIndex;
       setIndex(nextIndex);
     }
   }, [initialIndex, index, tracks.length]);
