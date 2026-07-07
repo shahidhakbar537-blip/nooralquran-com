@@ -20,16 +20,18 @@ export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-primary text-primary-foreground grid place-items-center font-arabic text-lg leading-none shadow-sm">
-            ﷽
+      <div className="mx-auto max-w-6xl px-4 py-2 flex items-center justify-between gap-4">
+        <Link to="/" className="flex flex-col items-start gap-1 group">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-lg bg-primary text-primary-foreground grid place-items-center font-arabic text-xl leading-none shadow-sm">
+              ﷽
+            </div>
+            <div className="leading-tight">
+              <div className="font-semibold text-foreground text-base">Noor al-Quran</div>
+              <div className="text-[11px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
+            </div>
           </div>
-          <div className="leading-tight">
-            <div className="font-semibold text-foreground">Noor al-Quran</div>
-            <div className="text-[10px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
-            <div className="text-[10px] text-muted-foreground">Created by S.Shahidh Akbar</div>
-          </div>
+          <div className="text-base font-medium text-muted-foreground whitespace-nowrap">Created by S.Shahidh Akbar</div>
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => {
