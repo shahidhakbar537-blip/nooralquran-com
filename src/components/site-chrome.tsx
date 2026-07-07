@@ -28,6 +28,7 @@ export function SiteHeader() {
           <div className="leading-tight">
             <div className="font-semibold text-foreground">Noor al-Quran</div>
             <div className="text-[10px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
+            <div className="text-[10px] text-muted-foreground">Created by S.Shahidh Akbar</div>
           </div>
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
