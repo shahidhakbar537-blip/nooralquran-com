@@ -18,6 +18,13 @@ export function AudioPlayer({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const nextIndex = Math.min(Math.max(initialIndex, 0), tracks.length - 1);
+    if (Number.isFinite(nextIndex) && nextIndex !== index) {
+      setIndex(nextIndex);
+    }
+  }, [initialIndex, index, tracks.length]);
+
+  useEffect(() => {
     onIndexChange?.(index);
   }, [index, onIndexChange]);
 
@@ -26,6 +33,7 @@ export function AudioPlayer({
     if (!a) return;
     if (playing) {
       setLoading(true);
+      a.currentTime = 0;
       a.play().catch(() => setPlaying(false)).finally(() => setLoading(false));
     } else {
       a.pause();
