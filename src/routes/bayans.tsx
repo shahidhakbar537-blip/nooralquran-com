@@ -385,29 +385,47 @@ function BayansPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((b) => {
           const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-            b.title + " " + b.speaker,
+            b.search ? b.id : b.title + " " + b.speaker,
           )}`;
+          const thumbnail = b.search
+            ? null
+            : `https://i.ytimg.com/vi/${b.id}/hqdefault.jpg`;
+          const handleClick = () => {
+            if (b.search) {
+              window.open(searchUrl, "_blank", "noopener,noreferrer");
+            } else {
+              setActive(b);
+            }
+          };
           return (
             <div
               key={b.id + b.title}
               className="group text-left rounded-xl overflow-hidden border border-border bg-card hover:-translate-y-0.5 transition-transform"
             >
               <button
-                onClick={() => setActive(b)}
+                onClick={handleClick}
                 className="block w-full text-left"
                 aria-label={`Play ${b.title}`}
               >
                 <div className="relative aspect-video bg-muted overflow-hidden">
-                  <img
-                    src={`https://i.ytimg.com/vi/${b.id}/hqdefault.jpg`}
-                    alt={b.title}
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "https://i.ytimg.com/img/no_thumbnail.jpg";
-                    }}
-                    className="w-full h-full object-cover"
-                  />
+                  {thumbnail ? (
+                    <img
+                      src={thumbnail}
+                      alt={b.title}
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src =
+                          "https://i.ytimg.com/img/no_thumbnail.jpg";
+                      }}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 via-gold/10 to-primary/30 text-center px-4">
+                      <span className="text-sm font-semibold text-foreground/80 line-clamp-3">
+                        {b.title}
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 grid place-items-center bg-black/20 group-hover:bg-black/40 transition-colors">
                     <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-lg">
                       <Play className="w-6 h-6 ml-0.5" fill="currentColor" />
