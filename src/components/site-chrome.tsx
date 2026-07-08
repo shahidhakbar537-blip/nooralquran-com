@@ -31,7 +31,7 @@ export function SiteHeader() {
               <div className="text-[11px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
             </div>
           </div>
-          <div className="text-lg font-medium text-muted-foreground whitespace-nowrap">Created by S.Shahidh Akbar</div>
+          <div className="text-sm font-medium text-muted-foreground whitespace-nowrap">Created by S.Shahidh Akbar</div>
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => {
