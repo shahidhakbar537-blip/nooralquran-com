@@ -13,11 +13,12 @@ export const Route = createFileRoute("/bayans")({
 });
 
 type Bayan = {
-  id: string; // YouTube video ID
+  id: string; // YouTube video ID, OR a search query when `search` is true
   title: string;
   speaker: string;
-  category: "Recitation" | "Praise of Allah" | "Daily Practice" | "Bayan" | "Tafsir" | "Hadith" | "Seerah";
+  category: "Recitation" | "Praise of Allah" | "Daily Practice" | "Bayan" | "Tafsir" | "Hadith" | "Seerah" | "Tamil";
   duration?: string;
+  search?: boolean; // when true, clicking opens a YouTube search instead of the embedded player
 };
 
 // Curated list of well-known public lectures & recitations on YouTube
