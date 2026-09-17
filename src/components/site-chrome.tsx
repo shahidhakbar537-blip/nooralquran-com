@@ -28,7 +28,7 @@ export function SiteHeader() {
             </div>
             <div className="leading-tight">
               <div className="font-semibold text-foreground text-base">Noor al-Quran</div>
-              <div className="text-[11px] uppercase tracking-widest text-gold">Recite · Reflect · Pray</div>
+              <div className="text-sm font-medium uppercase text-gold">Recite · Reflect · Pray</div>
             </div>
           </div>
           <div className="text-sm font-medium text-muted-foreground whitespace-nowrap">Created by S.Shahidh Akbar</div>
@@ -60,7 +60,7 @@ export function SiteHeader() {
             <Link
               key={n.to}
               to={n.to}
-              className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${
+              className={`shrink-0 inline-flex min-h-10 items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${
                 active ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"
               }`}
             >

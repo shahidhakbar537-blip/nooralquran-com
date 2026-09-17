@@ -41,8 +41,8 @@ function HowToPray() {
             <div key={name} className="rounded-lg bg-accent/40 p-3 text-center">
               <div className="text-sm font-semibold">{name}</div>
               <div className="text-2xl font-bold text-primary mt-0.5">{r}</div>
-              <div className="text-[11px] text-muted-foreground">{content.rakahLabel}</div>
-              <div className="text-[11px] text-muted-foreground mt-1">{when}</div>
+               <div className="text-sm text-muted-foreground">{content.rakahLabel}</div>
+               <div className="text-sm text-muted-foreground mt-1">{when}</div>
             </div>
           ))}
         </div>
@@ -65,11 +65,11 @@ function HowToPray() {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-foreground/80">{s.body}</p>
+                 <p className="mt-3 text-base leading-relaxed text-foreground/80">{s.body}</p>
                 <div className="mt-5 rounded-lg border border-border bg-card p-4">
                   <div className="font-arabic text-2xl text-primary text-right">{s.arabic}</div>
-                  <div className="text-sm italic mt-2">{s.transliteration}</div>
-                  <div className="text-xs text-muted-foreground">{s.meaning}</div>
+                   <div className="text-base italic mt-2">{s.transliteration}</div>
+                   <div className="text-sm text-muted-foreground">{s.meaning}</div>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@ function HowToPray() {
         ))}
       </ol>
 
-      <div className="mt-10 text-center text-sm text-muted-foreground">
+       <div className="mt-10 text-center text-base text-muted-foreground">
         {content.closingNote}
       </div>
     </div>
