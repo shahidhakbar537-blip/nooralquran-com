@@ -431,13 +431,13 @@ function BayansPage() {
                       <Play className="w-6 h-6 ml-0.5" fill="currentColor" />
                     </div>
                   </div>
-                  <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-background/90 text-[10px] font-medium uppercase tracking-wider">
+                  <div className="absolute top-2 left-2 px-2 py-1 rounded-full bg-background/90 text-sm font-medium uppercase">
                     {b.category}
                   </div>
                 </div>
                 <div className="p-4 pb-2">
                   <h3 className="font-semibold leading-snug line-clamp-2">{b.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{b.speaker}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{b.speaker}</p>
                 </div>
               </button>
               <div className="px-4 pb-4">
@@ -445,7 +445,7 @@ function BayansPage() {
                   href={searchUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                  className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                 >
                   <ExternalLink className="w-3 h-3" /> Open on YouTube
                 </a>
@@ -487,7 +487,7 @@ function BayansPage() {
                 <p className="text-sm text-muted-foreground">
                   {active.speaker} · {active.category}
                 </p>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="mt-1 text-sm text-muted-foreground">
                   Video not loading? Use the buttons on the right to watch it directly on YouTube.
                 </p>
               </div>
@@ -520,7 +520,7 @@ function BayansPage() {
         </div>
       )}
 
-      <p className="text-center text-xs text-muted-foreground mt-8">
+      <p className="text-center text-sm text-muted-foreground mt-8">
         Videos are hosted on YouTube by their respective channels.
       </p>
     </div>
