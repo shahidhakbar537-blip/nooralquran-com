@@ -6,7 +6,12 @@
       "name": "tanstack_start_ts",
       "dependencies": {
         "@fontsource/amiri": "^5.2.8",
+        "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
         "@fontsource/inter": "^5.2.8",
+        "@fontsource/noto-sans-devanagari": "^5.3.0",
+        "@fontsource/noto-sans-kannada": "^5.3.0",
+        "@fontsource/noto-sans-tamil": "^5.3.0",
+        "@fontsource/noto-sans-telugu": "^5.3.0",
         "@hookform/resolvers": "^5.2.2",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -210,7 +215,17 @@
 
     "@fontsource/amiri": ["@fontsource/amiri@5.2.8", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/amiri/-/amiri-5.2.8.tgz", {}, "sha512-HT/wBlEC/ummjXWg5yH+V0Tzw1vITtI9UM8mwxhwOkNZWD2zuie5vXpAVSCZORArT/LUQ4NP0fRcjiElUwI/8A=="],
 
+    "@fontsource/atkinson-hyperlegible-next": ["@fontsource/atkinson-hyperlegible-next@5.3.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/atkinson-hyperlegible-next/-/atkinson-hyperlegible-next-5.3.0.tgz", {}, "sha512-8p1tHVoPDo6oYwSO3sMw5snGwFwSf3TmeSF9Gcj792GXdsg6oqvhoItbj6Hj/XZIk0Xs+Cwu6pkLBAl3Q5HrwA=="],
+
     "@fontsource/inter": ["@fontsource/inter@5.2.8", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/inter/-/inter-5.2.8.tgz", {}, "sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg=="],
+
+    "@fontsource/noto-sans-devanagari": ["@fontsource/noto-sans-devanagari@5.3.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/noto-sans-devanagari/-/noto-sans-devanagari-5.3.0.tgz", {}, "sha512-7khYmipS/5KAUUmrO1DKir8yL8XI00d0+ZE9BqbS8XF1jzObv6CpPOk3UeYxF+Pvi8bx9bBvprBCOcbx/eQWTQ=="],
+
+    "@fontsource/noto-sans-kannada": ["@fontsource/noto-sans-kannada@5.3.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/noto-sans-kannada/-/noto-sans-kannada-5.3.0.tgz", {}, "sha512-mcZlaZfzFIwrjah3hze5W6JnFMk8+bXtw0aKOneeuM/sadyV/F6nIgFiJc9/d9yHeecpVfANt+dWf8VSXDf+3Q=="],
+
+    "@fontsource/noto-sans-tamil": ["@fontsource/noto-sans-tamil@5.3.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/noto-sans-tamil/-/noto-sans-tamil-5.3.0.tgz", {}, "sha512-webid7fyBljiIEJ1hXuey48vCUe2Oq3/EwYjo6XBtXItO9FoUmqy0bEnXA5iE++iC324BTI8QMy80SYtDheCzA=="],
+
+    "@fontsource/noto-sans-telugu": ["@fontsource/noto-sans-telugu@5.3.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/noto-sans-telugu/-/noto-sans-telugu-5.3.0.tgz", {}, "sha512-D5AD91Ok2wURk6Vf4sOe2KA3nf0M7qePboNVuvJbguOqLAplh3cGkEIX1qi9u1Jjcz9QWblQ5BbTXI/c+QjB9Q=="],
 
     "@hookform/resolvers": ["@hookform/resolvers@5.2.2", "", { "dependencies": { "@standard-schema/utils": "^0.3.0" }, "peerDependencies": { "react-hook-form": "^7.55.0" } }, "sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA=="],
 
