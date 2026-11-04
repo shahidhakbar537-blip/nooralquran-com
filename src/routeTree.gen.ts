@@ -9,68 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as YaseenRouteImport } from './routes/yaseen'
-import { Route as SurahsRouteImport } from './routes/surahs'
-import { Route as QuizRouteImport } from './routes/quiz'
-import { Route as ProphetsRouteImport } from './routes/prophets'
-import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
-import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
-import { Route as HolyCitiesRouteImport } from './routes/holy-cities'
-import { Route as HajjUmrahRouteImport } from './routes/hajj-umrah'
-import { Route as BookmarksRouteImport } from './routes/bookmarks'
-import { Route as BayansRouteImport } from './routes/bayans'
-import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AyatulKursiRouteImport } from './routes/ayatul-kursi'
+import { Route as BayansRouteImport } from './routes/bayans'
+import { Route as BookmarksRouteImport } from './routes/bookmarks'
+import { Route as HajjUmrahRouteImport } from './routes/hajj-umrah'
+import { Route as HolyCitiesRouteImport } from './routes/holy-cities'
+import { Route as HowToPrayRouteImport } from './routes/how-to-pray'
+import { Route as PrayerTimesRouteImport } from './routes/prayer-times'
+import { Route as ProphetsRouteImport } from './routes/prophets'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as SurahsRouteImport } from './routes/surahs'
+import { Route as YaseenRouteImport } from './routes/yaseen'
 import { Route as SurahNumberRouteImport } from './routes/surah.$number'
 
-const YaseenRoute = YaseenRouteImport.update({
-  id: '/yaseen',
-  path: '/yaseen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SurahsRoute = SurahsRouteImport.update({
-  id: '/surahs',
-  path: '/surahs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuizRoute = QuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProphetsRoute = ProphetsRouteImport.update({
-  id: '/prophets',
-  path: '/prophets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrayerTimesRoute = PrayerTimesRouteImport.update({
-  id: '/prayer-times',
-  path: '/prayer-times',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToPrayRoute = HowToPrayRouteImport.update({
-  id: '/how-to-pray',
-  path: '/how-to-pray',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HolyCitiesRoute = HolyCitiesRouteImport.update({
-  id: '/holy-cities',
-  path: '/holy-cities',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HajjUmrahRoute = HajjUmrahRouteImport.update({
-  id: '/hajj-umrah',
-  path: '/hajj-umrah',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookmarksRoute = BookmarksRouteImport.update({
-  id: '/bookmarks',
-  path: '/bookmarks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BayansRoute = BayansRouteImport.update({
-  id: '/bayans',
-  path: '/bayans',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AyatulKursiRoute = AyatulKursiRouteImport.update({
@@ -78,9 +33,54 @@ const AyatulKursiRoute = AyatulKursiRouteImport.update({
   path: '/ayatul-kursi',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BayansRoute = BayansRouteImport.update({
+  id: '/bayans',
+  path: '/bayans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookmarksRoute = BookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HajjUmrahRoute = HajjUmrahRouteImport.update({
+  id: '/hajj-umrah',
+  path: '/hajj-umrah',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HolyCitiesRoute = HolyCitiesRouteImport.update({
+  id: '/holy-cities',
+  path: '/holy-cities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToPrayRoute = HowToPrayRouteImport.update({
+  id: '/how-to-pray',
+  path: '/how-to-pray',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayerTimesRoute = PrayerTimesRouteImport.update({
+  id: '/prayer-times',
+  path: '/prayer-times',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProphetsRoute = ProphetsRouteImport.update({
+  id: '/prophets',
+  path: '/prophets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurahsRoute = SurahsRouteImport.update({
+  id: '/surahs',
+  path: '/surahs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YaseenRoute = YaseenRouteImport.update({
+  id: '/yaseen',
+  path: '/yaseen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SurahNumberRoute = SurahNumberRouteImport.update({
@@ -201,74 +201,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/yaseen': {
-      id: '/yaseen'
-      path: '/yaseen'
-      fullPath: '/yaseen'
-      preLoaderRoute: typeof YaseenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/surahs': {
-      id: '/surahs'
-      path: '/surahs'
-      fullPath: '/surahs'
-      preLoaderRoute: typeof SurahsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prophets': {
-      id: '/prophets'
-      path: '/prophets'
-      fullPath: '/prophets'
-      preLoaderRoute: typeof ProphetsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prayer-times': {
-      id: '/prayer-times'
-      path: '/prayer-times'
-      fullPath: '/prayer-times'
-      preLoaderRoute: typeof PrayerTimesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-pray': {
-      id: '/how-to-pray'
-      path: '/how-to-pray'
-      fullPath: '/how-to-pray'
-      preLoaderRoute: typeof HowToPrayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/holy-cities': {
-      id: '/holy-cities'
-      path: '/holy-cities'
-      fullPath: '/holy-cities'
-      preLoaderRoute: typeof HolyCitiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hajj-umrah': {
-      id: '/hajj-umrah'
-      path: '/hajj-umrah'
-      fullPath: '/hajj-umrah'
-      preLoaderRoute: typeof HajjUmrahRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bookmarks': {
-      id: '/bookmarks'
-      path: '/bookmarks'
-      fullPath: '/bookmarks'
-      preLoaderRoute: typeof BookmarksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bayans': {
-      id: '/bayans'
-      path: '/bayans'
-      fullPath: '/bayans'
-      preLoaderRoute: typeof BayansRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ayatul-kursi': {
@@ -278,11 +215,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AyatulKursiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/bayans': {
+      id: '/bayans'
+      path: '/bayans'
+      fullPath: '/bayans'
+      preLoaderRoute: typeof BayansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookmarks': {
+      id: '/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof BookmarksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hajj-umrah': {
+      id: '/hajj-umrah'
+      path: '/hajj-umrah'
+      fullPath: '/hajj-umrah'
+      preLoaderRoute: typeof HajjUmrahRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/holy-cities': {
+      id: '/holy-cities'
+      path: '/holy-cities'
+      fullPath: '/holy-cities'
+      preLoaderRoute: typeof HolyCitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-pray': {
+      id: '/how-to-pray'
+      path: '/how-to-pray'
+      fullPath: '/how-to-pray'
+      preLoaderRoute: typeof HowToPrayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayer-times': {
+      id: '/prayer-times'
+      path: '/prayer-times'
+      fullPath: '/prayer-times'
+      preLoaderRoute: typeof PrayerTimesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prophets': {
+      id: '/prophets'
+      path: '/prophets'
+      fullPath: '/prophets'
+      preLoaderRoute: typeof ProphetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surahs': {
+      id: '/surahs'
+      path: '/surahs'
+      fullPath: '/surahs'
+      preLoaderRoute: typeof SurahsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yaseen': {
+      id: '/yaseen'
+      path: '/yaseen'
+      fullPath: '/yaseen'
+      preLoaderRoute: typeof YaseenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/surah/$number': {
